@@ -1,0 +1,240 @@
+@import '@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Improved Typography */
+@layer base {
+    :root {
+        --font-body: 'Poppins', 'Segoe UI', sans-serif;
+        --font-display: 'Outfit', 'Poppins', 'Segoe UI', sans-serif;
+    }
+
+    html {
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply text-slate-800 antialiased;
+        font-family: var(--font-body);
+        line-height: 1.7;
+        letter-spacing: -0.01em;
+        overflow-x: hidden;
+        background:
+            radial-gradient(circle at top left, rgba(34, 197, 94, 0.08), transparent 25%),
+            radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.1), transparent 30%),
+            linear-gradient(180deg, #f7faf7 0%, #f4f7f5 100%);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-display);
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    p, li, a, span, label, input, textarea, select, button {
+        font-family: var(--font-body);
+    }
+
+    small, .text-xs, .text-sm {
+        letter-spacing: 0.01em;
+    }
+
+    .brand-wordmark {
+        font-family: var(--font-display);
+        font-weight: 800;
+        letter-spacing: -0.06em;
+    }
+
+    .eyebrow {
+        font-family: var(--font-body);
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+}
+
+@media (max-width: 640px) {
+    main {
+        padding-top: 1.25rem !important;
+        padding-bottom: 1.25rem !important;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+        max-width: 100%;
+    }
+
+    table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .flex {
+        min-width: 0;
+    }
+
+    button,
+    a {
+        max-width: 100%;
+        white-space: normal;
+    }
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.38), transparent 45%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+main,
+header,
+nav,
+section,
+article,
+.card,
+.rounded-\[1\.5rem\],
+.rounded-\[1\.75rem\],
+.rounded-2xl,
+.rounded-3xl,
+.bg-white,
+.bg-slate-50,
+.bg-gradient-to-br {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Hide scrollbars globally */
+html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Hide scrollbars on all elements */
+* {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* Fade-in animation for tags */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Smooth transitions for cards */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+}
+
+/* Gradient text effect */
+.gradient-text {
+    @apply bg-gradient-to-r from-[#0c7c43] to-emerald-400 bg-clip-text text-transparent;
+}
+
+/* Glow effect for buttons */
+.btn-glow {
+    @apply relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#0c7c43]/50;
+}
+
+.btn-glow::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.btn-glow:hover::before {
+    @apply opacity-20;
+}
+
+/* Smooth underline for links */
+.link-underline {
+    @apply relative transition-all duration-300;
+}
+
+.link-underline::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 h-0.5 w-0 rounded-full bg-[#0c7c43] transition-all duration-300;
+}
+
+.link-underline:hover::after {
+    @apply w-full;
+}
+
+/* Card hover effect */
+.card-hover {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-xl;
+}
+
+/* Shine effect */
+@keyframes shine {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.btn-shine {
+    @apply relative transition-all duration-300 hover:shadow-lg;
+}

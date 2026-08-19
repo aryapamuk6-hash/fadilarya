@@ -1,0 +1,21 @@
+php artisan tinker
+use App\Models\User;
+
+User::create([
+    'name' => 'Admin Lumira',
+    'email' => 'admin@lumira.com',
+    'password' => bcrypt('admin123'),
+    'role' => 'admin',
+]);
+
+kalau mau jadiin user sebagai admin: 
+php artisan tinker
+$user = User::where('email', 'emailkamu@gmail.com')->first();
+
+$user->update([
+    'role' => 'admin'
+]);
+
+lalu cek: $user->role;
+
+untuk cek semua akun : User::all();

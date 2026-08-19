@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+use Inertia\Response;
+
+class AuthenticatedSessionController extends Controller
+{
+    /**
+     * Display the login view.
+     */
+    public function create(): Response
+    {
+        return Inertia::render('Auth/Login', [
+            'canResetPassword' => Route::has('password.request'),
+            'status' => session('status'),
+        ]);
+    }
+
+    /**
+     * Handle an incoming authentication request.
+     */
+    public function store(LoginRequest $request): RedirectResponse
+    {
+        $request->authenticate();
+        $request->session()->regenerate();
+
+        $user = $request->user();
+
+        if (! $user) {
+            return redirect()->route('login');
+        }
+
+        if ($user->seller_status === 'suspended') {
+            return redirect()->route('user.dashboard')->with(
+                'error',
+                'Hak seller Anda sedang dicabut oleh admin.'
+            );
+        }
+
+        // Redirect ke dashboard sesuai dengan role user
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if ($user->role === 'seller') {
+            return redirect()->route('seller.dashboard');
+        }
+
+        // Regular user ke welcome page
+        return redirect('/');
+    }
+
+    protected function getDashboardRouteName(?string $role): string
+    {
+        return match ($role) {
+            'admin' => 'admin.dashboard',
+            'seller' => 'seller.dashboard',
+            'user' => 'user.dashboard',
+            default => 'user.dashboard',
+        };
+    }
+
+    /**
+     * Destroy an authenticated session.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+}
