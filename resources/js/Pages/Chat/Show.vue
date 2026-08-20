@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
 import { Head, router, usePage } from '@inertiajs/vue3'
-import { nextTick, onMounted, ref, watch, computed } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref, watch, computed } from 'vue'
 
 const props = defineProps({
     conversation: Object,
@@ -14,12 +14,21 @@ const sortedMessages = computed(() => {
 const page = usePage()
 const message = ref('')
 const chatBox = ref(null)
+let pollingTimer = null
 
 const scrollToBottom = () => {
     nextTick(() => {
         if (chatBox.value) {
             chatBox.value.scrollTop = chatBox.value.scrollHeight
         }
+    })
+}
+
+const refreshConversation = () => {
+    router.reload({
+        only: ['conversation'],
+        preserveState: true,
+        preserveScroll: true,
     })
 }
 
@@ -41,6 +50,13 @@ const sendMessage = () => {
 
 onMounted(() => {
     scrollToBottom()
+    pollingTimer = window.setInterval(refreshConversation, 3000)
+})
+
+onBeforeUnmount(() => {
+    if (pollingTimer) {
+        window.clearInterval(pollingTimer)
+    }
 })
 
 watch(

@@ -41,7 +41,7 @@ watch(
                     </div>
 
                     <div class="hidden sm:ms-6 sm:flex sm:items-center sm:gap-3">
-                        <Link v-if="$page.props.auth.user.role !== 'admin'" :href="route('chat.index')" class="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-green-100 bg-[#f4faf5] text-lg text-slate-600 transition hover:border-[#0c7c43]/40 hover:bg-[#edf9ee] hover:text-[#0c7c43]" title="Pesan Masuk">
+                        <Link v-if="$page.props.auth.user.role !== 'admin'" href="/chat" class="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-green-100 bg-[#f4faf5] text-lg text-slate-600 transition hover:border-[#0c7c43]/40 hover:bg-[#edf9ee] hover:text-[#0c7c43]" title="Pesan Masuk">
                             <i class="fas fa-comments"></i>
                             <span class="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[#0c7c43] ring-2 ring-white"></span>
                         </Link>

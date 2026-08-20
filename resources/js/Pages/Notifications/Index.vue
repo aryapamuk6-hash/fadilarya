@@ -80,7 +80,7 @@ function readAll()
                     <Link
                         v-for="(notification, idx) in sortedNotifications"
                         :key="notification.id"
-                        :href="notification.type === 'chat' ? route('chat.index') : route('notifications.index')"
+                        :href="notification.type === 'chat' ? '/chat' : route('notifications.index')"
                         data-aos="fade-up"
                         :data-aos-delay="idx * 30"
                         class="group block overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100 transition duration-300 hover:shadow-lg hover:shadow-green-900/10 sm:rounded-[1.5rem]"

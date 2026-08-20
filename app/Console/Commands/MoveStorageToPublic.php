@@ -25,7 +25,7 @@ class MoveStorageToPublic extends Command
         $files = File::allFiles($source);
 
         foreach ($files as $file) {
-            $relative = str_replace($source.'\\', '', $file->getPathname());
+            $relative = ltrim(str_replace($source, '', $file->getPathname()), '/\\');
             $dest = $target.DIRECTORY_SEPARATOR.$relative;
             File::ensureDirectoryExists(dirname($dest));
             File::copy($file->getPathname(), $dest);

@@ -99,7 +99,7 @@ const formatCurrency = (value) => {
                         <p class="mt-2 text-sm leading-6 text-slate-500">Lihat produk terbaru di platform dan cari peluang lebih besar.</p>
                     </Link>
 
-                    <Link :href="route('chat.index')" class="group rounded-[1.6rem] bg-gradient-to-br from-[#fefce8] to-[#fff6d4] p-6 text-slate-800 ring-1 ring-yellow-100 transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-900/10" data-aos="fade-up" data-aos-delay="200">
+                    <Link href="/chat" class="group rounded-[1.6rem] bg-gradient-to-br from-[#fefce8] to-[#fff6d4] p-6 text-slate-800 ring-1 ring-yellow-100 transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-green-900/10" data-aos="fade-up" data-aos-delay="200">
                         <div class="flex items-center justify-between">
                             <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-xl text-[#0c7c43]"><i class="fas fa-comments"></i></span>
                             <span class="rounded-full bg-white px-2 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-[#0c7c43]">Inbox</span>

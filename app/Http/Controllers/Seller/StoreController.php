@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\HandlesUploads;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class StoreController extends Controller
 {
+    use HandlesUploads;
+
     public function edit()
     {
         return Inertia::render(
@@ -39,12 +42,7 @@ class StoreController extends Controller
                 );
             }
 
-            $store->logo = $request
-                ->file('logo')
-                ->store(
-                    'stores',
-                    'public'
-                );
+            $store->logo = $this->saveToPublic($request->file('logo'), 'stores');
         }
 
         if ($request->hasFile('banner')) {
@@ -55,12 +53,7 @@ class StoreController extends Controller
                 );
             }
 
-            $store->banner = $request
-                ->file('banner')
-                ->store(
-                    'stores',
-                    'public'
-                );
+            $store->banner = $this->saveToPublic($request->file('banner'), 'stores');
         }
 
         $store->name = $request->name;

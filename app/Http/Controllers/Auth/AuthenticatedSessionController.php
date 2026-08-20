@@ -54,8 +54,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('seller.dashboard');
         }
 
-        // Regular user ke welcome page
-        return redirect('/');
+        // Let the dashboard route resolve the regular user's destination.
+        return redirect()->route('dashboard');
     }
 
     protected function getDashboardRouteName(?string $role): string

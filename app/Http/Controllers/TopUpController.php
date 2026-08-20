@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\TopUp;
+use App\Http\Controllers\Traits\HandlesUploads;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class TopUpController extends Controller
 {
+    use HandlesUploads;
+
     public function index()
     {
         return Inertia::render(
@@ -39,12 +41,7 @@ class TopUpController extends Controller
             ],
         ]);
 
-        $proof = $request
-            ->file('proof')
-            ->store(
-                'topups',
-                'public'
-            );
+        $proof = $this->saveToPublic($request->file('proof'), 'topups');
 
         TopUp::create([
             'user_id' => auth()->id(),

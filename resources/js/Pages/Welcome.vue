@@ -184,7 +184,7 @@ onUnmounted(() => {
                             <Link v-if="loggedUser?.seller_status !== 'suspended' && loggedUser?.role === 'seller'" :href="route('seller.withdrawals.index')" class="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-lg text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-emerald-600" title="Tarik Dana">
                                 <i class="fas fa-money-bill-wave"></i>
                             </Link>
-                            <Link :href="route('chat.index')" class="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-lg text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" title="Pesan Masuk">
+                            <Link href="/chat" class="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-lg text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" title="Pesan Masuk">
                                 <i class="fas fa-comments"></i>
                             </Link>
                             <Link :href="route('notifications.index')" class="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-lg text-slate-600 shadow-sm transition hover:bg-slate-50 hover:text-slate-900" title="Notifikasi">
